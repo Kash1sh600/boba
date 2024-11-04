@@ -1,0 +1,135 @@
+.cup-selector {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left */
+    text-align: center;
+}
+
+.size-buttons button,
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.size-buttons button:hover,
+button:hover {
+    background-color: #ffd1dc;
+    transform: scale(1.05);
+}
+
+.flavor-buttons {
+    margin-top: 20px;
+}
+
+.cup-animation {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.cup {
+    width: 100px;
+    height: 150px;
+    border-radius: 20px;
+    border: 2px solid lightgray;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    transition: height 0.3s ease;
+}
+
+.small {
+    height: 100px;
+}
+
+.medium {
+    height: 150px;
+}
+
+.large {
+    height: 200px;
+}
+
+.liquid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 192, 203, 0.6);
+    height: 0;
+    border-radius: 10px 10px 0 0;
+    transition: height 1s ease-in-out;
+}
+
+.topping {
+    position: absolute;
+    opacity: 1; /* Ensure they are visible when settled */
+    animation: fall 1s ease forwards, settle 0.5s ease forwards 1s; /* Falling and then settling */
+}
+
+.boba,
+.poppingBoba,
+.fruitJelly {
+    width: 12px; /* Slightly larger for more visibility */
+    height: 12px;
+    border-radius: 50%;
+    margin: 2px;
+}
+
+.boba {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.poppingBoba {
+    background-color: rgba(255, 192, 203, 0.6);
+}
+
+.fruitJelly {
+    background-color: rgba(135, 206, 250, 0.6);
+}
+
+@keyframes fall {
+    0% {
+        bottom: 100%; /* Start above the cup */
+        opacity: 0;   /* Start invisible */
+    }
+    80% {
+        opacity: 1;   /* Become visible before settling */
+    }
+    100% {
+        bottom: 10px; /* Settle inside the cup */
+    }
+}
+
+@keyframes settle {
+    0% {
+        transform: translateY(0); /* Stay in place after settling */
+    }
+    100% {
+        transform: translateY(0); /* Stay in place */
+    }
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-4px);
+    }
+}
+
+.ice-cube {
+    width: 15px;
+    height: 15px;
+    background-color: rgba(173, 216, 230, 0.8); /* Light blue color for ice */
+    border-radius: 3px;
+    position: absolute;
+}
+
+
+
+
+
