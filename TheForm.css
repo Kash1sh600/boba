@@ -1,0 +1,161 @@
+/* General Background for Form */
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 100px;
+  }
+  
+  /* Main Rectangle Form */
+  .cup-selector {
+    width: 320px;
+    padding: 25px;
+    background-color: #ffffff;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Buttons Styling */
+  button {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #e0e4e9;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #cfd8df;
+    color: #444;
+  }
+  
+  /* Size, Drink Type, Topping, and Ice Buttons */
+  .size-buttons, .drink-type-buttons, .topping-buttons, .ice-buttons {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .size-buttons button, 
+  .drink-type-buttons button {
+    flex: 1;
+  }
+  
+  .topping-buttons button, 
+  .ice-buttons button {
+    width: 100%;
+  }
+  
+  /* Right Side Panel */
+  .right-side {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background-color: #ffffff;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+  
+  /* Reset and Fill My Cup Buttons */
+  .right-side button {
+    width: 85%;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #5a9;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+  }
+  
+  .right-side button:hover {
+    background-color: #4b8;
+  }
+  
+  /* Cup Animation Container */
+  .cup-animation {
+    position: relative;
+    width: 160px;
+    height: 260px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 3px solid #ddd;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  /* Liquid in the Cup */
+  .liquid {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #d4a373; /* Default color for liquid */
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    transition: height 0.3s ease;
+  }
+  
+  /* Toppings Styles */
+  .topping {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  
+  /* Different Topping Colors */
+  .boba {
+    background-color: #4b2d2d; /* Dark Brown for Boba */
+  }
+  
+  .poppingBoba {
+    background-color: #ff9f68; /* Orange for Popping Boba */
+  }
+  
+  .fruitJelly {
+    background-color: #ff637d; /* Pinkish for Fruit Jelly */
+  }
+  
+  /* Ice Cube Style */
+  .ice-cube {
+    width: 14px;
+    height: 14px;
+    background-color: #cceeff; /* Light blue for ice */
+    border-radius: 3px;
+    opacity: 0.85;
+    position: absolute;
+  }
+  
+  /* Label Styles */
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    margin: 10px 0;
+  }
+  
