@@ -1,0 +1,486 @@
+
+
+.video-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 70px;
+    z-index: -1;
+}
+
+.video {
+    width: 100%; /* Adjust to control size */
+    max-width: 1400px;
+    max-height: 780px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+/* Overlay for Text and Button */
+.video-overlay {
+    position: absolute;
+    bottom: 12rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .overlay-heading {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+  
+  .overlay-button {
+    display: inline-block;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background-color: #ff5227;
+    border: 2px solid #ff5227;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .overlay-button:hover {
+    background-color: #fff;
+    color: #ff5227;
+    border-color: #ff5227;
+  }
+
+  .freshly-baked-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 4.5rem;
+    max-width: 1400px;
+    margin: 0.5rem auto;
+}
+
+.freshly-baked-heading {
+    font-family: 'Cambria', Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: left;
+}
+
+.navigation-arrows {
+    display: flex;
+    gap: 10px;
+}
+
+.arrow-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.arrow-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.arrow-button:hover:not(:disabled) {
+    background-color: #ff5227;
+}
+
+.arrow-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.product-card {
+  min-width: 32%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  width: 88vw;
+  max-width: 550px;
+  text-decoration: none;
+  color: inherit;
+  padding-left: 10px;
+  transition: transform 0.5s ease-in-out;
+  z-index: -2;
+}
+
+.product-card-image-container {
+  position: relative;
+  width: 100%;
+}
+
+.product-card-image {
+  width: 100%;
+  height: 98%;
+  border-radius: 10px;
+}
+
+.product-card-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ffda77;
+  padding: 2px 5px;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  border-radius: 3px;
+}
+
+.product-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.product-card-title {
+  font-size: 1.25em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.product-card-price {
+  font-size: 1em;
+  color: #333;
+}
+
+.carousel-container {
+  padding-left: 20px;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.where-to-buy-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0; /* Adjust padding as needed */
+}
+
+.where-to-buy-button {
+  display: flex;
+  font-family: 'Cambria', Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2rem;
+  padding: 15px 525px;
+  color: #ff5227;
+  background-color: transparent;
+  border: 1px solid #ff5227;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+.where-to-buy-button:hover {
+  background-color: #ff5227;
+  color: #fff;
+}
+
+.centered-text-section {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  background-color: #fff6e6;
+  align-items: center;
+}
+
+.centered-text-box {
+  border: 1px solid #ff5227; /* Accent border */
+  border-radius: 15px;
+  padding: 100px 50px; /* Vertical padding adjusted */
+  max-width: 90%;
+  width: 100%;
+  text-align: center;
+  background-color: #fff6e6; /* White background for the text box */
+
+}
+
+.centered-text-content {
+  font-family: 'Cambria', Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333;
+  text-align: center;
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+.centered-text-section .centered-text-content {
+  font-size: 1.5rem; /* Adjust for mobile or smaller screens */
+}
+
+/* Ensure responsiveness for larger screens */
+@media (min-width: 768px) {
+  .centered-text-content {
+    font-size: 2rem;
+  }
+}
+
+/* Outer Wrapper for Marquee */
+.marquee-wrapper {
+  padding: 2rem 65px; /* Adds 50px padding on the left and right */
+  overflow: hidden; /* Ensures content stays within the visible area */
+  width: 100%; /* Ensures it takes full width */
+  box-sizing: border-box; /* Ensures padding is included in total width */
+}
+
+/* Marquee Container */
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  z-index: -10;
+}
+
+/* Marquee Text */
+.marquee-text {
+  font-family: 'Cambria', serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  line-height: 110%;
+  white-space: nowrap;
+  margin-right: 5rem; /* Space between each item */
+}
+
+.shop-heading-container {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: left;
+  padding: 0 4rem;
+}
+
+.shop-heading {
+  font-family: 'Cambria', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 120%;
+  text-align: center;
+  letter-spacing: -0.8px;
+  color: #333;
+}
+
+@media (min-width: 1024px) {
+  .shop-heading {
+    font-size: 2.5rem;
+  }
+}
+
+/* Container */
+.container {
+  overflow: hidden;
+  padding: 0 4rem;
+  display: flex;
+}
+
+/* Scrollable container */
+.scrollable-container {
+  display: flex;
+  gap: 1rem;
+  transform: translate3d(0, 0, 0);
+  overflow-x: auto;
+  white-space: nowrap; /* Prevents wrapping */
+}
+
+
+/* Item container */
+.item {
+  display: inline-flex; /* Allows items to display in a row within the scrollable container */
+  padding-top: 0.25rem;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+/* Link styling */
+.item-link {
+  position: relative;
+  display: flex;
+  aspect-ratio: 3 / 4;
+  height: auto;
+  width: 88vw;
+  min-width: 320px;
+  max-width: 405px;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+/* Image styling */
+.item-image {
+  aspect-ratio: 3 / 4;
+  height: auto;
+  width: 88vw;
+  min-width: 320px;
+  max-width: 453px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Text overlay container */
+.text-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+}
+
+/* Wrapper for text background and text */
+.text-wrapper {
+  display: flex;
+  position: relative;
+  height: 80px;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+}
+
+/* SVG background */
+.text-background {
+  position: absolute;
+  height: 100%;
+  width: 280px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: fill 0.3s ease;
+}
+
+.text-background .path {
+  fill: #ffffff; /* Background color */
+  stroke: #FF5227;
+  stroke-width: 1.5;
+}
+
+/* Text styling */
+.text {
+  font-family: serif;
+  font-weight: normal;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  z-index: 10;
+  color: #000;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Hover effect */
+.item-link:hover .text {
+  color: #ffffff; /* Text color on hover */
+}
+
+.item-link:hover .text-background .path {
+  fill: #FF5227; /* Background color on hover */
+}
+
+.how-to-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 60px; /* Adjust padding if needed */
+}
+
+.how-to-centered-text-section {
+  flex: 1; /* Take equal space as the image container */
+  display: flex;
+  justify-content: flex-start; /* Align to the left, or you can use center depending on design */
+  align-items: flex-start; /* Align content to the top */
+  padding: 2rem 0;
+
+}
+
+.how-to-centered-text-box {
+  width: 100%; /* Make the text box take up 100% of the container */
+  max-width: 100%; /* Ensure it doesn't exceed container's width */
+  padding: 0; /* Remove padding to eliminate the gap */
+  border: 1px solid #ff5227; /* Accent border */
+  border-radius: 15px;
+  text-align: center;
+}
+
+.how-to-text {
+  font-size: 1.5rem; /* Adjust as needed */
+  font-weight: bold; /* Adjust text style as needed */
+  margin-top: 30px; /* Remove margin to eliminate any space above the text */
+}
+
+.how-to-container {
+  min-height: 535px;
+  padding: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container {
+  flex: 1; /* Take equal space as the text box */
+  width: 90%; /* Ensure the image takes up full width of its container */
+}
+
+.image-container img {
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  max-height: 600px; /* Set max-height for image */
+  object-fit: cover; /* Ensure the image covers the area without stretching */
+}
+
+.newsletter-signup {
+  background-color: #FDE8DF;
+  color: #F97316;
+  font-family: 'Domine', serif;
+}
+
+.newsletter-signup input[type="email"] {
+  padding-left: 1rem;
+  border: 2px solid #F97316;
+  border-right: none;
+}
+
+.newsletter-signup button {
+  background-color: transparent;
+  color: #F97316;
+  border: 2px solid #F97316;
+  padding: 0.75rem 2rem;
+  font-family: 'Domine', serif;
+}
+
+.privacy-policy {
+  font-size: 0.875rem;
+  color: #F97316;
+}
+
+
+
+
+
+
+
