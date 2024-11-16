@@ -1,0 +1,25 @@
+.menu-footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ef6363;
+    background-color: #fffefe;
+    margin-left: -550px;
+    margin-right: -550px;
+  }
+
+  .menu-footer p{
+    font-size: 18px;
+    padding-bottom: 20px;
+    color: #ef6363;
+    font-weight: bold;
+  }
+  
+  .footer-links,
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    color:#0d0401
+  }
+  

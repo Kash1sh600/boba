@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 const TheForm = () => {
   const [size, setSize] = useState('');
+  const [activeSize, setActiveSize] = useState('');
   const [drinkType, setDrinkType] = useState('');
   const [liquidHeight, setLiquidHeight] = useState(0);
   const [liquidColor, setLiquidColor] = useState('rgba(255, 192, 203, 0.6)');
@@ -13,12 +14,24 @@ const TheForm = () => {
   const [toppingsList, setToppingsList] = useState([]);
   const [showAddToppingButton, setShowAddToppingButton] = useState(false);
   const [iceAdded, setIceAdded] = useState(false);
+  const [showPoppingBobaFlavors, setShowPoppingBobaFlavors] = useState(false);
+  const [poppingBobaFlavor, setPoppingBobaFlavor] = useState('');
+
+  const milkBasedOptions = [
+    'Classic Milk Tea',
+    'Brown Sugar Milk Tea',
+    'Matcha Milk Tea',
+    'Taro Milk Tea',
+    'Thai Milk Tea',
+    'Honeydew Milk Tea',
+  ];
+
+  const waterBasedOptions = ['Strawberry Fruit Tea', 'Passionfruit Tea', 'Mango Green Tea'];
 
   const handleSizeChange = (newSize) => {
     setSize(newSize);
-    setLiquidHeight(0);
-    setFlavorSelected(false);
-    setToppingsList([]);
+    setActiveSize(newSize);
+    setLiquidHeight(0); // Reset liquid height when size changes
   };
 
   const handleDrinkTypeChange = (type) => {
@@ -44,41 +57,60 @@ const TheForm = () => {
           'Classic Milk Tea': 'rgba(160, 82, 45, 0.8)',
           'Brown Sugar Milk Tea': 'rgba(139, 69, 19, 0.8)',
           'Matcha Milk Tea': 'rgba(34, 139, 34, 0.8)',
-        }[flavor] || 'rgba(255, 192, 203, 0.6)'
+          'Taro Milk Tea': 'rgba(140, 90, 60, 0.8)',
+          'Thai Milk Tea': 'rgba(242, 85, 44, 0.8)',
+          'Honeydew Milk Tea': 'rgba(173, 255, 47, 0.8)',
+        }[flavor] || 'rgba(255, 192, 203, 0.6)',
       );
     } else if (drinkType === 'water') {
-      setLiquidColor('rgba(135, 206, 250, 0.6)');
+      setLiquidColor(
+        {
+          'Strawberry Fruit Tea': 'rgba(238, 69, 148, 0.3)',
+          'Passionfruit Tea': 'rgba(220, 117, 48, 0.3)',
+          'Mango Green Tea': 'rgba(255, 204, 51, 0.3)',
+        }[flavor] || 'rgba(255, 192, 203, 0.6)',
+      );
     }
     setPendingFlavor(null);
   };
 
   const handleFillCup = () => {
     const maxHeight = { small: 90, medium: 135, large: 180 }[size] || 0;
-
     if (pendingFlavor) {
       applyFlavor(pendingFlavor);
     }
-
     setLiquidHeight(maxHeight);
   };
 
   const handleToppingChange = (selectedTopping) => {
     setTopping(selectedTopping);
     setShowAddToppingButton(true);
+    if (selectedTopping === 'poppingBoba') {
+      setShowPoppingBobaFlavors(true);
+    } else {
+      setShowPoppingBobaFlavors(false);
+    }
   };
 
-  const handleAddTopping = () => {
+  const handlePoppingBobaFlavorSelect = (flavor) => {
+    setPoppingBobaFlavor(flavor);
+    setShowAddToppingButton(false);
+    setShowPoppingBobaFlavors(false);
+    handleAddTopping(`poppingBoba-${flavor}`);
+  };
+
+  const handleAddTopping = (flavor = topping) => {
     const newToppings = Array.from({ length: 10 }, (_, index) => ({
-      type: topping,
+      type: flavor,
       id: Date.now() + index,
     }));
     setToppingsList(newToppings);
     setShowAddToppingButton(false);
-    setTopping('');
   };
 
   const handleReset = () => {
     setSize('');
+    setActiveSize('');
     setDrinkType('');
     setLiquidHeight(0);
     setLiquidColor('rgba(255, 192, 203, 0.6)');
@@ -88,6 +120,8 @@ const TheForm = () => {
     setShowAddToppingButton(false);
     setPendingFlavor(null);
     setIceAdded(false);
+    setShowPoppingBobaFlavors(false);
+    setPoppingBobaFlavor('');
   };
 
   const handleIceChange = (addIce) => {
@@ -98,50 +132,87 @@ const TheForm = () => {
     <div className='background'>
       <div className="cup-selector">
         <div className="size-buttons">
-          <button onClick={() => handleSizeChange('small')}>Small</button>
-          <button onClick={() => handleSizeChange('medium')}>Medium</button>
-          <button onClick={() => handleSizeChange('large')}>Large</button>
+          <button
+            className={`small ${activeSize === 'small' ? 'active' : ''}`}
+            onClick={() => handleSizeChange('small')}
+          ></button>
+          <button
+            className={`medium ${activeSize === 'medium' ? 'active' : ''}`}
+            onClick={() => handleSizeChange('medium')}
+          ></button>
+          <button
+            className={`large ${activeSize === 'large' ? 'active' : ''}`}
+            onClick={() => handleSizeChange('large')}
+          ></button>
         </div>
-
         <div className="drink-type-buttons">
-          <button onClick={() => handleDrinkTypeChange('milk')}>Milk-based</button>
-          <button onClick={() => handleDrinkTypeChange('water')}>Water-based</button>
-        </div>
+  <button onClick={() => handleDrinkTypeChange('milk')}>Milk-based</button>
+  <button onClick={() => handleDrinkTypeChange('water')}>Water-based</button>
+</div>
+{drinkType && (
+  <div className="flavor-buttons">
+    {drinkType === 'milk' && (
+      <div className="milk-options"> {/* Updated class name */}
+        {milkBasedOptions.map((flavor) => (
+          <button 
+            key={flavor} 
+            onClick={() => handleFlavorChange(flavor)} 
+            className="flavor-button"
+          >
+            {flavor}
+          </button>
+        ))}
+      </div>
+    )}
+    {drinkType === 'water' && (
+      <div className="water-options"> {/* Updated class name */}
+        {waterBasedOptions.map((flavor) => (
+          <button 
+            key={flavor} 
+            onClick={() => handleFlavorChange(flavor)} 
+            className="flavor-button"
+          >
+            {flavor}
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+)}
 
-        {drinkType && (
-          <div className="flavor-buttons">
-            {drinkType === 'milk' && (
-              <>
-                <button onClick={() => handleFlavorChange('Classic Milk Tea')}>Classic Milk Tea</button>
-                <button onClick={() => handleFlavorChange('Brown Sugar Milk Tea')}>Brown Sugar Milk Tea</button>
-                <button onClick={() => handleFlavorChange('Matcha Milk Tea')}>Matcha Milk Tea</button>
-              </>
-            )}
-            {drinkType === 'water' && (
-              <>
-                <button onClick={() => handleFlavorChange('Strawberry Fruit Tea')}>Strawberry Fruit Tea</button>
-                <button onClick={() => handleFlavorChange('Passionfruit Tea')}>Passionfruit Tea</button>
-              </>
-            )}
+        
+        
+        
+        <div className="topping-buttons">
+          <button onClick={() => handleToppingChange('boba')}>Boba</button>
+          <button onClick={() => handleToppingChange('poppingBoba')}>Popping Boba</button>
+          <button onClick={() => handleToppingChange('fruitJelly')}>Fruit Jelly</button>
+        </div>
+        {showPoppingBobaFlavors && (
+          <div className="popping-boba-flavors">
+            <div className="popping-boba-button-row">
+              {['Yogurt', 'Mango', 'Blueberry', 'Strawberry', 'Peach', 'Passion fruit'].map((flavor) => (
+                <button 
+                  key={flavor} 
+                  onClick={() => handlePoppingBobaFlavorSelect(flavor)}
+                  className="popping-boba-button"
+                >
+                  {flavor} Popping Boba
+                </button>
+              ))}
+            </div>
           </div>
         )}
-
-        <div className="topping-buttons">
-          <button onClick={() => handleToppingChange('boba')}>Add Boba</button>
-          <button onClick={() => handleToppingChange('poppingBoba')}>Add Popping Boba</button>
-          <button onClick={() => handleToppingChange('fruitJelly')}>Add Fruit Jelly</button>
-        </div>
-        {showAddToppingButton && <button onClick={handleAddTopping}>Add {topping}</button>}
-
+        {showAddToppingButton && !showPoppingBobaFlavors && (
+          <button onClick={() => handleAddTopping()}>Add {topping}</button>
+        )}
         <div className="ice-buttons">
-          <button onClick={() => handleIceChange(true)}>Ice</button>
-          <button onClick={() => handleIceChange(false)}>No Ice</button>
+          <button className="ice-button" onClick={() => handleIceChange(true)}>Ice</button>
+          <button className="no-ice-button" onClick={() => handleIceChange(false)}>No Ice</button>
         </div>
       </div>
-
       <div className='right-side'>
         <button onClick={handleReset}>Reset</button>
-
         <div className="cup-animation">
           <div className={`cup ${size}`}>
             <motion.div
@@ -153,43 +224,43 @@ const TheForm = () => {
             {toppingsList.map((topping, index) => (
               <motion.div
                 key={topping.id}
-                className={`topping ${topping.type}`}
-                initial={{ y: -50, opacity: 0 }}
-                animate={{
-                  y: 60 + Math.floor(index / 5) * 15,
-                  opacity: 1,
-                  transition: { delay: index * 0.1, duration: 0.5, ease: "easeOut" },
+                className={`${topping.type}`}
+                initial={{
+                  y: -100,
+                  x: Math.random() * 100 - 50,
                 }}
-                style={{
-                  left: `${(index % 5) * 15 + 20}px`,
-                  position: 'absolute',
-                  bottom: '10px',
+                animate={{
+                  y: [0, 140, 160],
+                  x: 0,
+                }}
+                transition={{
+                  delay: index * 0.05,
+                  duration: 1.2,
                 }}
               />
             ))}
-
-            {iceAdded && Array.from({ length: 5 }).map((_, index) => (
-              <motion.div
-                key={`ice-${index}`}
-                className="ice-cube"
-                initial={{ y: -50, opacity: 0 }}
-                animate={{
-                  y: [70, 40],
-                  opacity: 1,
-                  transition: { delay: index * 0.2, duration: 1, ease: "easeOut" },
-                }}
-                style={{
-                  left: `${20 + index * 15}px`,
-                  position: 'absolute',
-                }}
-              />
-            ))}
+            {iceAdded &&
+              Array.from({ length: 10 }, (_, index) => (
+                <motion.div
+                  key={index}
+                  className="ice-cube"
+                  initial={{
+                    y: -100,
+                    x: Math.random() * 100 - 50,
+                  }}
+                  animate={{
+                    y: [0, 140, 160],
+                    x: 0,
+                  }}
+                  transition={{
+                    delay: index * 0.05,
+                    duration: 1.2,
+                  }}
+                />
+              ))}
           </div>
         </div>
-
-        {flavorSelected || pendingFlavor ? (
-          <button onClick={handleFillCup}>Fill My Cup</button>
-        ) : null}
+        {drinkType && <button onClick={handleFillCup}>Fill My Cup</button>}
       </div>
     </div>
   );
