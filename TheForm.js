@@ -17,21 +17,12 @@ const TheForm = () => {
   const [showPoppingBobaFlavors, setShowPoppingBobaFlavors] = useState(false);
   const [poppingBobaFlavor, setPoppingBobaFlavor] = useState('');
 
-  const milkBasedOptions = [
-    'Classic Milk Tea',
-    'Brown Sugar Milk Tea',
-    'Matcha Milk Tea',
-    'Taro Milk Tea',
-    'Thai Milk Tea',
-    'Honeydew Milk Tea',
-  ];
-
-  const waterBasedOptions = ['Strawberry Fruit Tea', 'Passionfruit Tea', 'Mango Green Tea'];
-
   const handleSizeChange = (newSize) => {
     setSize(newSize);
     setActiveSize(newSize);
-    setLiquidHeight(0); // Reset liquid height when size changes
+    setLiquidHeight(0);
+    setFlavorSelected(false);
+    setToppingsList([]);
   };
 
   const handleDrinkTypeChange = (type) => {
@@ -57,19 +48,13 @@ const TheForm = () => {
           'Classic Milk Tea': 'rgba(160, 82, 45, 0.8)',
           'Brown Sugar Milk Tea': 'rgba(139, 69, 19, 0.8)',
           'Matcha Milk Tea': 'rgba(34, 139, 34, 0.8)',
-          'Taro Milk Tea': 'rgba(140, 90, 60, 0.8)',
-          'Thai Milk Tea': 'rgba(242, 85, 44, 0.8)',
-          'Honeydew Milk Tea': 'rgba(173, 255, 47, 0.8)',
-        }[flavor] || 'rgba(255, 192, 203, 0.6)',
+        }[flavor] || 'rgba(255, 192, 203, 0.6)'
       );
     } else if (drinkType === 'water') {
       setLiquidColor(
-        {
-          'Strawberry Fruit Tea': 'rgba(238, 69, 148, 0.3)',
-          'Passionfruit Tea': 'rgba(220, 117, 48, 0.3)',
-          'Mango Green Tea': 'rgba(255, 204, 51, 0.3)',
-        }[flavor] || 'rgba(255, 192, 203, 0.6)',
-      );
+        {'Strawberry Fruit Tea':'rgba(238, 69, 148, 0.3)',
+          'Passionfruit Tea':'rgba(220, 117, 48, 0.3)',
+        }[flavor] || 'rgba(255, 192, 203, 0.6)');
     }
     setPendingFlavor(null);
   };
@@ -146,43 +131,34 @@ const TheForm = () => {
           ></button>
         </div>
         <div className="drink-type-buttons">
-  <button onClick={() => handleDrinkTypeChange('milk')}>Milk-based</button>
-  <button onClick={() => handleDrinkTypeChange('water')}>Water-based</button>
+          <button onClick={() => handleDrinkTypeChange('milk')}>Milk-based</button>
+          <button onClick={() => handleDrinkTypeChange('water')}>Water-based</button>
+        </div>
+        {drinkType && (
+          <div className="flavor-buttons">
+            {drinkType === 'milk' && (
+              <div className="milk-options">
+               
+  <button onClick={() => handleFlavorChange('Classic Milk Tea')}>Classic Milk Tea</button>
+  <button onClick={() => handleFlavorChange('Brown Sugar Milk Tea')}>Brown Sugar Milk Tea</button>
+  <button onClick={() => handleFlavorChange('Matcha Milk Tea')}>Matcha Milk Tea</button>
+  <button onClick={() => handleFlavorChange('Taro Milk Tea')}>Taro Milk Tea</button>
+  <button onClick={() => handleFlavorChange('Thai Milk Tea')}>Thai Milk Tea</button>
+  <button onClick={() => handleFlavorChange('Honeydew Milk Tea')}>Honeydew Milk Tea</button>
 </div>
-{drinkType && (
-  <div className="flavor-buttons">
-    {drinkType === 'milk' && (
-      <div className="milk-options"> {/* Updated class name */}
-        {milkBasedOptions.map((flavor) => (
-          <button 
-            key={flavor} 
-            onClick={() => handleFlavorChange(flavor)} 
-            className="flavor-button"
-          >
-            {flavor}
-          </button>
-        ))}
-      </div>
-    )}
-    {drinkType === 'water' && (
-      <div className="water-options"> {/* Updated class name */}
-        {waterBasedOptions.map((flavor) => (
-          <button 
-            key={flavor} 
-            onClick={() => handleFlavorChange(flavor)} 
-            className="flavor-button"
-          >
-            {flavor}
-          </button>
-        ))}
-      </div>
-    )}
-  </div>
-)}
 
-        
-        
-        
+            )}
+            {drinkType === 'water' && (
+              <div className="water-options">
+                
+  <button onClick={() => handleFlavorChange('Strawberry Fruit Tea')}>Strawberry Fruit Tea</button>
+  <button onClick={() => handleFlavorChange('Passionfruit Tea')}>Passionfruit Tea</button>
+  <button onClick={() => handleFlavorChange('Mango Fruit Tea')}>Mango Fruit Tea</button>
+</div>
+
+            )}
+          </div>
+        )}
         <div className="topping-buttons">
           <button onClick={() => handleToppingChange('boba')}>Boba</button>
           <button onClick={() => handleToppingChange('poppingBoba')}>Popping Boba</button>
@@ -221,46 +197,80 @@ const TheForm = () => {
               animate={{ height: `${liquidHeight}px` }}
               transition={{ duration: 0 }}
             />
-            {toppingsList.map((topping, index) => (
-              <motion.div
-                key={topping.id}
-                className={`${topping.type}`}
-                initial={{
-                  y: -100,
-                  x: Math.random() * 100 - 50,
-                }}
-                animate={{
-                  y: [0, 140, 160],
-                  x: 0,
-                }}
-                transition={{
-                  delay: index * 0.05,
-                  duration: 1.2,
-                }}
-              />
-            ))}
-            {iceAdded &&
-              Array.from({ length: 10 }, (_, index) => (
-                <motion.div
-                  key={index}
-                  className="ice-cube"
-                  initial={{
-                    y: -100,
-                    x: Math.random() * 100 - 50,
-                  }}
-                  animate={{
-                    y: [0, 140, 160],
-                    x: 0,
-                  }}
-                  transition={{
-                    delay: index * 0.05,
-                    duration: 1.2,
-                  }}
-                />
-              ))}
-          </div>
+           {toppingsList.map((topping, index) => (
+  <motion.div
+    key={topping.id}  // Unique key for each topping
+    className={`${topping.type}`} // Ensure a unique class for each topping type (boba, popping boba, etc.)
+    initial={{
+      y: -100,  // Start above the cup
+      x: Math.random() * 100 - 50, // Random horizontal position near the top for a natural fall
+      opacity: 1,
+      rotate: Math.random() * 360,  // Random rotation for a more natural fall
+    }}
+    animate={{
+      y: 0,  // Final position at the bottom (y=0 for settling at the cup's bottom)
+      x: Math.random() * 100 - 50,  // Randomize horizontal position within the cup's width (adjust this value if needed)
+      opacity: 1,
+      rotate: 0,  // Rotate back to normal after falling
+      scale: Math.random() * 0.2 + 0.8,  // Random scale for realism
+      transition: {
+        delay: index * 0.1,  // Stagger the fall
+        duration: 0.8 + Math.random() * 0.2,  // Slight randomness in fall speed
+        ease: "easeOut",  // Smooth deceleration
+      },
+    }}
+    style={{
+      position: 'absolute',
+      bottom: '10px',  // Ensures toppings settle at the bottom of the cup
+      left: `calc(50% + ${Math.random() * 40 - 20}px)`,  // Randomized horizontal position at the bottom
+      width: topping.type === 'boba' ? '20px' : '25px',  // Sizes for different toppings
+      height: topping.type === 'boba' ? '20px' : '25px',
+      borderRadius: topping.type === 'boba' ? '50%' : '0%',  // Round for boba, square for other toppings
+      backgroundColor: 
+        topping.type === 'boba' ? 'rgba(0, 0, 0, 0.8)' :  // Black with transparency for boba
+        topping.type === 'poppingBoba' ? 'rgba(255, 0, 0, 0.6)' :  // Red with transparency for popping boba
+        topping.type === 'fruitJelly' ? 'rgba(157, 34, 48, 0.7)' :  // Orange with transparency for fruit jelly
+        'transparent',  // Default to transparent if no topping type matches
+      boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',  // Adds depth
+    }}
+    
+    
+  />
+))}
+
+
+
+             {/* Ice Cubes Animation */}
+             {iceAdded && Array.from({ length: 5 }).map((_, index) => (
+  <motion.div
+    key={`ice-${index}`}
+    className="ice-cube"
+    initial={{ y: -50, opacity: 0, rotate: 0 }}
+    animate={{
+      y: [70, 40 + Math.random() * 20, 60 + Math.random() * 10], // Random vertical settling
+      opacity: 1,
+      rotate: [-15 + Math.random() * 30, 10, 0], // Small random rotation effect
+      x: [0, Math.random() * 40 - 20, 0], // Randomized horizontal position (more variation)
+    }}
+    transition={{
+      delay: index * 0.2, // Staggered delay for each ice cube
+      duration: 1.5, // Slower animation for gradual effect
+      ease: "easeOut",
+    }}
+    style={{
+      left: `${5 + (index * 20)}px`, // Increased horizontal spacing between ice cubes
+      position: 'absolute',
+    }}
+  />
+))}
+
         </div>
-        {drinkType && <button onClick={handleFillCup}>Fill My Cup</button>}
+      </div>
+        {flavorSelected || pendingFlavor ? (
+          <button onClick={handleFillCup}>Fill Cup</button>
+        ) : (
+          <button disabled>Please select a flavor</button>
+        )}
       </div>
     </div>
   );
