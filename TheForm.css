@@ -488,28 +488,3 @@ button:hover {
 }
 
 
-
-
-
-.flavor-button {
-  padding: 10px 15px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.2s ease;
-}
-
-.flavor-button:hover {
-  background-color: #ffe4e1;
-}
-
-
-
-
-
-
-
-
-
